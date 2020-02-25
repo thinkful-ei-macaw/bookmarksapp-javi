@@ -35,7 +35,8 @@ function generateBookmarkElement(bookmark) {
 
 function generateBookmarksString(bookmarkList){
 
-  const items = bookmarkList.map((bookmark) => generateItemElement(bookmarkList));
+  const items = bookmarkList.map((bookmark) => generateBookmarkElement(bookmark));
+  
 
   return items.join("");
 
