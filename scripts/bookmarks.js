@@ -71,12 +71,12 @@ $("main").on("click", ".add-bookmark", event => {
 function createNewBookmarkButton() {
   $("main").on("click", '#submitBookmark', event => {
     event.preventDefault();
-    let formInfo =  serializeJson(formData);
-
+    let formElement = $("#adding-bookmark")[0];
+    let formInfo =  serializeJson(formElement);
     api
       .createNewBookmark(formInfo)
       .then(newBookmark => {
-        store.createBookmark(newBookmark);
+        store.createNewBookmark(newBookmark);
         render();
       })
     }
@@ -113,7 +113,7 @@ function generateBookmarksString(bookmarkList){
 // convert form data into an array of objects 
 
 function serializeJson(form) {
-  const formData = new FormData(form);
+  const formData =  new FormData(form);
   const o = {};
   formData.forEach((val, name) => o[name] = val);
   return JSON.stringify(o);

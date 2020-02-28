@@ -4,7 +4,7 @@ function getData() {
   return fetch(`${BASE_URL}/bookmarks`);
 }
 
-function createBookmark(item) {
+function createNewBookmark(item) {
   return fetch(`${BASE_URL}/bookmarks`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -14,5 +14,5 @@ function createBookmark(item) {
 
 export default {
   getData,
-  createBookmark,
+  createNewBookmark,
 }
