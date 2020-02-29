@@ -7,7 +7,7 @@ const main = function() {
   api.getData()
   .then(res => res.json())
   .then((items) => {
-    items.forEach((item) => store.createBookmark(item));
+    items.forEach((item) => store.createNewBookmark(item));
     bookmark.render();    
   bookmark.eventListenerBinder();
   })

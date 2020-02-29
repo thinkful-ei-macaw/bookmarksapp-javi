@@ -4,8 +4,9 @@ let error = null;
 let filter = 0;
 
 function createNewBookmark(newBookmark) {
-  this.bookmarks.push(newBookmark)
+  this.bookmarks.push(newBookmark);
 };
+
 
 function findbyID(id) {
   return this.bookmarks.find(currentID => currentID === id);

@@ -32,8 +32,10 @@ const generateDefaultPage = function() {
 const generateAddingPage = function() {
   return `<form id="adding-bookmark">
   <fieldset>
-  <label for="bookmarkAdd">Add a new Bookmark:</label><br>
-  <input type="url" id="bookmarklink" name="bookmarklink">
+  <label for="bookmarktitle">Add a title for your new bookmark:</label>
+  <input type="text" id="title" name="title"></input><br>
+  <label for="bookmarkadd">Add a new bookmark:</label>
+  <input type="url" id="bookmarklink" name="bookmarklink"></input><br>
   <div class="dropdown">
   <div class="star-rating>
   </div>
@@ -69,12 +71,11 @@ $("main").on("click", ".add-bookmark", event => {
 }
 
 function createNewBookmarkButton() {
-  $("main").on("click", '#submitBookmark', event => {
+  $("main").on("submit", "#submitBookmark", event => {
     event.preventDefault();
     let formElement = $("#adding-bookmark")[0];
     let formInfo =  serializeJson(formElement);
-    api
-      .createNewBookmark(formInfo)
+    api.createNewBookmark(formInfo)
       .then(newBookmark => {
         store.createNewBookmark(newBookmark);
         render();
@@ -98,8 +99,10 @@ function generateBookmarkElement(bookmark) {
           <li id="${bookmark.id}">
             <span class="bookmark-title">${bookmark.title}</span><br>
             <span class="bookmark-rating">${bookmark.rating}</span><br>   
-            <span class="bookmark-url">${bookmark.url}</span>
-          </li>`;
+            <span class="bookmark-url">${bookmark.url}</span><br>
+            <span class="bookmark-desc">${bookmark.desc}</span>
+          </li>`
+            
 }
 
 function generateBookmarksString(bookmarkList){
