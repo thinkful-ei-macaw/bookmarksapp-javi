@@ -125,11 +125,11 @@ function cancelButton () {
 }
 
 function filterButton(){
-  $('main').on('change', '#rating-select', (e) => {
-    event.preventDefault();
-    render();
-  
-  })
+$('main').on('change', '#rating-select', (e) => {
+  e.preventDefault();
+  renderBookmarkList();
+
+})
 }
   
 
@@ -177,36 +177,12 @@ function generateBookmarkElement(bookmark) {
 
 function generateBookmarksString(bookmarkList){
   
-
-  if($('#rating-select').val() <= 5) {
-  const newBookmarkList = store.bookmarks.filter(item => item.rating <= 5)
-  const items = newBookmarkList.map((bookmarks) => generateBookmarkElement(bookmarks));
-  return items.join(""); 
-  }
-
-  else if($('#rating-select').val() <= 4) {
-  const newBookmarkList = store.bookmarks.filter(item => item.rating <= 4)
-  const items = newBookmarkList.map((bookmarks) => generateBookmarkElement(bookmarks));
-  return items.join(""); 
-  }
-
-  else if($('#rating-select').val() <= 3) {
-    const newBookmarkList = store.bookmarks.filter(item => item.rating <= 3)
+console.log($( "#rating-select option:selected" ).val())
+  if($('#rating-select').val() !== typeof 'number') {
+    const newBookmarkList = store.bookmarks.filter(item => item.rating <= $('#rating-select').val())
     const items = newBookmarkList.map((bookmarks) => generateBookmarkElement(bookmarks));
-    return items.join(""); 
-    }
-
-  else if($('#rating-select').val() <= 2) {
-      const newBookmarkList = store.bookmarks.filter(item => item.rating <= 2)
-      const items = newBookmarkList.map((bookmarks) => generateBookmarkElement(bookmarks));
-      return items.join(""); 
-      }
-
-  else if($('#rating-select').val() <= 1) {
-        const newBookmarkList = store.bookmarks.filter(item => item.rating <= 1)
-        const items = newBookmarkList.map((bookmarks) => generateBookmarkElement(bookmarks));
-        return items.join(""); 
-        }
+    return items.join("");
+  }
 
   else {
     const items = bookmarkList.map((bookmarks) => generateBookmarkElement(bookmarks));
