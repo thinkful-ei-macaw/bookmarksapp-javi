@@ -14,11 +14,11 @@ const generateDefaultPage = function() {
       <label for ="rating-box">Filter by rating</label>
       <select id="rating-select" name="rating-select" class="dropdown">
         <option value="showAll">Show All</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
         <option value="5">5</option>
+        <option value="4">4</option>
+        <option value="3">3</option>
+        <option value="2">2</option>
+        <option value="1">1</option>
      </select>
     </section>
    </div>
@@ -38,6 +38,7 @@ const generateAddingPage = function() {
   <label for="bookmarkadd">Add a new bookmark:</label>
   <input type="url" id="bookmarklink" name="bookmarklink"></input><br>
   <section class="rating-box">
+  <label for="ratingselector">Select your rating</label>
     <select id="rating-select" name="rating-select" class="dropdown">
       <option value="1">1</option>
       <option value="2">2</option>
@@ -115,10 +116,19 @@ function deleteButton() {
     })
 })
 }
-const filterButton = function() {
-  $('#main').on('change', '#rating-select', event => {
+
+function cancelButton () {
+  $("main").on("click", "#cancelBookmark", event => {
     event.preventDefault();
-    render();
+    render(); }
+  )
+}
+
+function filterButton(){
+  $('main').on('change', '#rating-select', () => {
+    let rating = $('#rating-select').val();
+    store.filter = parseInt(rating);
+  
   });
 };
 
@@ -168,25 +178,26 @@ function generateBookmarkElement(bookmark) {
 
 function generateBookmarksString(bookmarkList){
 
-  
   const items = bookmarkList.map((bookmarks) => generateBookmarkElement(bookmarks));
   
 
   return items.join("");
-  
+
+
 
 }
 
 
 //this  function will render the bookmarks list to the DOM
 function renderBookmarkList() {
-  const bookmarking = store.bookmarks.filter(item => item.rating >= store.bookmarks.rating);
   
-  const bookmarkItemsString = generateBookmarksString(bookmarking);
   
-
+  const bookmarkItemsString = generateBookmarksString(store.bookmarks);
+  
   // insert that HTML into the DOM
   $('.js-bookmark-list').html(bookmarkItemsString);
+  
+
 }
 
 
@@ -204,6 +215,7 @@ function eventListenerBinder() {
   deleteButton();
   getID();
   filterButton();
+  cancelButton();
 
 }
 

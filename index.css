@@ -1,11 +1,60 @@
-li {
-    margin-bottom: 20px;
-    border: 1px solid white;
-    padding: 20px;
-    background: #8FB7A5;
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
   }
 
-  .hidden {
+ body{
+    display: flex;
+    justify-content: center;
+    background-color: lightcoral;
+  }
+
+.buttons {
+ padding: 20px;
+ display: flex;
+ flex-direction: column;
+}
+
+.add-bookmark {
+  height: 70px;
+  width: 200px;
+}
+
+
+#submitBookmark, #cancelBookmark {
+  margin: 20px; 
+}
+
+h1 {
+  text-align: center;
+}
+
+li {
+    margin-bottom: 20px;
+    padding: 20px;
+    background:pink;
+    list-style: none;
+  }
+
+section {
+  padding: 0; 
+  margin: 0;
+}
+
+fieldset{
+  display: flex;
+  flex-direction: row;
+  margin: 100px;
+  padding: 20px;  
+}
+
+fieldset > input {
+  height: 40px;
+  width: 300px;
+}
+
+.hidden {
     display: none;
     overflow: hidden;
   }
