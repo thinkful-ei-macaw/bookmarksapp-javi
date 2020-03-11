@@ -39,7 +39,7 @@ const generateAddingPage = function() {
   <input type="url" id="bookmarklink" name="bookmarklink"></input><br>
   <section class="rating-box">
   <label for="ratingselector">Select your rating</label>
-    <select id="rating-select" name="rating-select" class="dropdown">
+    <select id="rating-select-add" name="rating-select-add" class="dropdown">
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
@@ -76,7 +76,7 @@ function createNewBookmarkButton() {
     let title = $('#title').val();
     let url = $('#bookmarklink').val();
     let desc = $('#bookmarkdescription').val();
-    let rating = $('#rating-select').val();
+    let rating = $('#rating-select-add').val();
     
 
 
@@ -126,12 +126,10 @@ function cancelButton () {
 
 function filterButton(){
   $('main').on('change', '#rating-select', () => {
-    let rating = $('#rating-select').val();
-    store.filter = parseInt(rating);
-  
-  });
-};
 
+  
+  })
+}
   
 
 function getID(item){
@@ -177,12 +175,43 @@ function generateBookmarkElement(bookmark) {
 }
 
 function generateBookmarksString(bookmarkList){
-
+  
+  if($('#rating-select').val()) {
   const items = bookmarkList.map((bookmarks) => generateBookmarkElement(bookmarks));
+  return items.join("");
+  }
+  else if($('#rating-select').val() <= 5) {
+  const newBookmarkList = store.bookmarks.filter(item => item.rating <= 5)
+  const items = newBookmarkList.map((bookmarks) => generateBookmarkElement(bookmarks));
+  return items.join(""); 
+  }
+
+  else if($('#rating-select').val() <= 4) {
+  const newBookmarkList = store.bookmarks.filter(item => item.rating <= 4)
+  const items = newBookmarkList.map((bookmarks) => generateBookmarkElement(bookmarks));
+  return items.join(""); 
+  }
+
+  else if($('#rating-select').val() <= 3) {
+    const newBookmarkList = store.bookmarks.filter(item => item.rating <= 3)
+    const items = newBookmarkList.map((bookmarks) => generateBookmarkElement(bookmarks));
+    return items.join(""); 
+    }
+
+  else if($('#rating-select').val() <= 2) {
+      const newBookmarkList = store.bookmarks.filter(item => item.rating <= 2)
+      const items = newBookmarkList.map((bookmarks) => generateBookmarkElement(bookmarks));
+      return items.join(""); 
+      }
+
+  else if($('#rating-select').val() <= 1) {
+        const newBookmarkList = store.bookmarks.filter(item => item.rating <= 1)
+        const items = newBookmarkList.map((bookmarks) => generateBookmarkElement(bookmarks));
+        return items.join(""); 
+        }
   
 
-  return items.join("");
-
+  
 
 
 }
