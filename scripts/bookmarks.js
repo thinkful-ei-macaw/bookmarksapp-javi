@@ -125,8 +125,9 @@ function cancelButton () {
 }
 
 function filterButton(){
-  $('main').on('change', '#rating-select', () => {
-
+  $('main').on('change', '#rating-select', (e) => {
+    event.preventDefault();
+    render();
   
   })
 }
@@ -176,11 +177,8 @@ function generateBookmarkElement(bookmark) {
 
 function generateBookmarksString(bookmarkList){
   
-  if($('#rating-select').val()) {
-  const items = bookmarkList.map((bookmarks) => generateBookmarkElement(bookmarks));
-  return items.join("");
-  }
-  else if($('#rating-select').val() <= 5) {
+
+  if($('#rating-select').val() <= 5) {
   const newBookmarkList = store.bookmarks.filter(item => item.rating <= 5)
   const items = newBookmarkList.map((bookmarks) => generateBookmarkElement(bookmarks));
   return items.join(""); 
@@ -209,6 +207,11 @@ function generateBookmarksString(bookmarkList){
         const items = newBookmarkList.map((bookmarks) => generateBookmarkElement(bookmarks));
         return items.join(""); 
         }
+
+  else {
+    const items = bookmarkList.map((bookmarks) => generateBookmarkElement(bookmarks));
+          return items.join("");
+          }
   
 
   
