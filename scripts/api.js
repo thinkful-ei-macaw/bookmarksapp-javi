@@ -8,11 +8,20 @@ function createNewBookmark(item) {
   return fetch(`${BASE_URL}/bookmarks`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: item,
+    body: JSON.stringify(item),
   });
 }
+
+
+function deleteBookmarks(id) {
+  return fetch(`${BASE_URL}/bookmarks/${id}`, {
+    method: 'DELETE'
+  });
+};
+
 
 export default {
   getData,
   createNewBookmark,
+  deleteBookmarks,
 }

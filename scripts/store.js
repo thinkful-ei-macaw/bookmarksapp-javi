@@ -8,10 +8,13 @@ function createNewBookmark(newBookmark) {
 };
 
 
-function findbyID(id) {
+function findByID(id) {
   return this.bookmarks.find(currentID => currentID === id);
 }
 
+const deleteBookmark = function (id) {
+  this.bookmarks = this.bookmarks.filter(currentItem => currentItem.id !== id);
+};
 
 
 
@@ -21,6 +24,8 @@ export default {
   error,
   filter,
   createNewBookmark,
-  findbyID,
+  findByID,
+  deleteBookmark,
+ 
  
 };  
