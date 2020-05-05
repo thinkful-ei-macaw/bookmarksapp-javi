@@ -14,11 +14,11 @@ const generateDefaultPage = function() {
       <label for ="rating-box">Filter by rating</label>
       <select id="rating-select" name="rating-select" class="dropdown">
         <option value="showAll">Show All</option>
-        <option value="5">5</option>
-        <option value="4">4</option>
-        <option value="3">3</option>
-        <option value="2">2</option>
-        <option value="1">1</option>
+        <option value=5>5</option>
+        <option value=4>4</option>
+        <option value=3>3</option>
+        <option value=2>2</option>
+        <option value=1>1</option>
      </select>
     </section>
    </div>
@@ -54,7 +54,7 @@ const generateAddingPage = function() {
 </textarea>
 
 <input type="submit" id="submitBookmark" value="Add new bookmark">
-<input type="submit" id="cancelBookmark" value="Cancel">
+<input type="cancel" id="cancelBookmark" value="Cancel">
 </fieldset>
 </form>
 `
@@ -72,24 +72,24 @@ $("main").on("click", ".add-bookmark", event => {
 function createNewBookmarkButton() {
   $(document).on("submit", "#adding-bookmark", event => {
     event.preventDefault();
-
+    
     let title = $('#title').val();
     let url = $('#bookmarklink').val();
     let desc = $('#bookmarkdescription').val();
     let rating = $('#rating-select-add').val();
     
-
-
+    
+    
     let formInfo =  {title, url, desc, rating}
     api.createNewBookmark(formInfo)
-      .then(newBookmark => {
-        if(newBookmark.ok) {
-          newBookmark.json().then((bm) => {
+    .then(bm => {
+        // if(newBookmark.ok) {
+          // newBookmark.json().then((bm) => {
             store.createNewBookmark(bm);
-            console.log(rating);
+            // console.log(rating);
             render();
-          })
-        }
+          // })
+        // }
         
       })
     }
@@ -178,16 +178,19 @@ function generateBookmarkElement(bookmark) {
 function generateBookmarksString(bookmarkList){
   
 console.log($( "#rating-select option:selected" ).val())
-  if($('#rating-select').val() !== typeof 'number') {
+
+if ($('#rating-select').val() === 'showAll') {
+  const items = bookmarkList.map((bookmarks) => generateBookmarkElement(bookmarks));
+        return items.join("");
+        }
+
+else if ($('#rating-select').val() !== typeof 'number') {
     const newBookmarkList = store.bookmarks.filter(item => item.rating <= $('#rating-select').val())
     const items = newBookmarkList.map((bookmarks) => generateBookmarkElement(bookmarks));
     return items.join("");
   }
 
-  else {
-    const items = bookmarkList.map((bookmarks) => generateBookmarkElement(bookmarks));
-          return items.join("");
-          }
+
   
 
   
