@@ -54,7 +54,7 @@ const generateAddingPage = function() {
 </textarea>
 
 <input type="submit" id="submitBookmark" value="Add new bookmark">
-<input type="cancel" id="cancelBookmark" value="Cancel">
+<button type="cancel" id="cancelBookmark" >Cancel</button>
 </fieldset>
 </form>
 `
@@ -156,7 +156,7 @@ function generateBookmarkElement(bookmark) {
   return `
           <li id="${bookmark.id}">
             <span class="bookmark-title">${bookmark.title}</span><br>
-            <span class="bookmark-rating">${bookmark.rating}</span><br> 
+            <span class="bookmark-rating">Rating:${bookmark.rating}/5</span><br> 
           <div class="accordion hidden">  
             <span class="bookmark-url">${bookmark.url}</span><br>
             <span class="bookmark-desc">${bookmark.desc}</span>

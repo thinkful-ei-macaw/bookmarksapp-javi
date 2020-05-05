@@ -4,7 +4,7 @@ let error = null;
 let filter = 0;
 
 function createNewBookmark(newBookmark) {
-  this.bookmarks.push(newBookmark);
+  this.bookmarks.unshift(newBookmark);
 };
 
 

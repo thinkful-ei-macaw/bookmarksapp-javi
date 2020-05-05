@@ -49,7 +49,7 @@ fieldset{
   padding: 20px;  
 }
 
-fieldset > input {
+fieldset > input, fieldset > button {
   height: 40px;
   width: 300px;
 }
