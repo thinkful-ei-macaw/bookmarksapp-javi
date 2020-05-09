@@ -55,7 +55,5 @@ fieldset > input, fieldset > button {
 }
 
 .hidden {
-    display: none;
-    overflow: hidden;
-  }
-  
+  display: none;
+}

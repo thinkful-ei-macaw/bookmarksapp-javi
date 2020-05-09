@@ -96,9 +96,9 @@ function createNewBookmarkButton() {
   )}
 
 function expandButton() {
-  $("main").on("click", ".expand", event => {
+  $("main").on("click", `.expand`, event => {
     event.preventDefault();
-  $(".accordion").toggleClass('hidden');
+  $(`#myBookmark${bookmark.id}`).toggleClass('.hidden');
   })
 }
 
@@ -154,13 +154,16 @@ $("main").html(generateAddingPage());
 function generateBookmarkElement(bookmark) {
 
   return `
+          <div id=myBookmark${bookmark.id}>
           <li id="${bookmark.id}">
             <span class="bookmark-title">${bookmark.title}</span><br>
             <span class="bookmark-rating">Rating:${bookmark.rating}/5</span><br> 
-          <div class="accordion hidden">  
+          
+          <div class='accordion item'> 
             <span class="bookmark-url">${bookmark.url}</span><br>
             <span class="bookmark-desc">${bookmark.desc}</span>
-           </div>
+          </div>
+          
           
 
           <div class="ctrlbuttons">
@@ -168,6 +171,7 @@ function generateBookmarkElement(bookmark) {
           <button class="expand">Expand</button>
           </div>
           </li>
+          </div>
         `
 
         
@@ -185,7 +189,7 @@ if ($('#rating-select').val() === 'showAll') {
         }
 
 else if ($('#rating-select').val() !== typeof 'number') {
-    const newBookmarkList = store.bookmarks.filter(item => item.rating <= $('#rating-select').val())
+    const newBookmarkList = store.bookmarks.filter(item => item.rating >= $('#rating-select').val())
     const items = newBookmarkList.map((bookmarks) => generateBookmarkElement(bookmarks));
     return items.join("");
   }
