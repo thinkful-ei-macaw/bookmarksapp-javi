@@ -95,12 +95,11 @@ function createNewBookmarkButton() {
     }
   )}
 
-function expandButton() {
-  $("main").on("click", `.expand`, event => {
-    event.preventDefault();
-  $(`#myBookmark${bookmark.id}`).toggleClass('.hidden');
-  })
-}
+  function expandButton() {
+    $("ul").on("click", ".expand", event => {
+      $(event.target).siblings('.accordion').toggle();
+    })
+  }
 
 function deleteButton() {
   $("main").on("click", ".delete", event => {
@@ -154,22 +153,21 @@ $("main").html(generateAddingPage());
 function generateBookmarkElement(bookmark) {
 
   return `
-          <div id=myBookmark${bookmark.id}>
+          <div class="bookmark">
           <li id="${bookmark.id}">
             <span class="bookmark-title">${bookmark.title}</span><br>
             <span class="bookmark-rating">Rating:${bookmark.rating}/5</span><br> 
           
-          <div class='accordion item'> 
-            <span class="bookmark-url">${bookmark.url}</span><br>
+          <div class='accordion'> 
+            <span class="bookmark-url"><a href="${bookmark.url}">${bookmark.url}</a></span><br>
             <span class="bookmark-desc">${bookmark.desc}</span>
           </div>
           
           
-
-          <div class="ctrlbuttons">
+          
+       
           <button class="delete">Delete</button>
           <button class="expand">Expand</button>
-          </div>
           </li>
           </div>
         `
